@@ -11,12 +11,44 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        UINavigationBar.setupNavBarAppearance()
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = self.createTabBarController()
+        window?.makeKeyAndVisible()
+    }
+    
+    func createTabBarController() -> UITabBarController {
+        UITabBarController.setupTabBarAppearance()
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [self.createSearchNC(), self.createFavoritesNC()]
+        tabBarController.selectedIndex = 0
+        return tabBarController
+    }
+    
+    func createSearchNC() -> UINavigationController {
+        let searchVC = SearchUserVC()
+        searchVC.title = "Search"
+        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        let searchNav = UINavigationController(rootViewController: searchVC)
+        
+        return searchNav
+    }
+    
+    func createFavoritesNC() -> UINavigationController {
+        let favoritesVC = FavoritesVC()
+        favoritesVC.title = "Favorites"
+        favoritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        let favoritesNav = UINavigationController(rootViewController: favoritesVC)
+        
+        return favoritesNav
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

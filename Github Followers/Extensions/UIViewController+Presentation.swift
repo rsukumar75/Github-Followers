@@ -1,0 +1,52 @@
+//
+//  UIViewController+Alert.swift
+//  Github Followers
+//
+//  Created by Rishab Sukumar on 9/14/24.
+//
+
+import UIKit
+
+fileprivate var loadingView: GFLoadingView? = nil
+
+extension UIViewController {
+    func presentGFAlertOnMainThread(alertTitle: String?, message: String?, buttonTitle: String?) {
+        DispatchQueue.main.async {
+            let alertController = GFAlertController(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
+            alertController.modalPresentationStyle = .overFullScreen
+            alertController.modalTransitionStyle = .crossDissolve
+            
+            self.present(alertController, animated: true)
+        }
+    }
+    
+    func showLoadingView() {
+        loadingView = GFLoadingView(frame: self.view.bounds)
+        guard let loadingView = loadingView else { return }
+        
+        self.view.addSubview(loadingView)
+        self.view.bringSubviewToFront(loadingView)
+        
+        UIView.animate(withDuration: 0.15) {
+            loadingView.alpha = 0.8
+        }
+        
+        loadingView.loadingIndicator.startAnimating()
+        
+    }
+    
+    func dismissLoadingView() {
+        DispatchQueue.main.async {
+            loadingView?.loadingIndicator.stopAnimating()
+            loadingView?.removeFromSuperview()
+            loadingView = nil
+        }
+    }
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emptyStateView = GFEmptyStateView(message: message)
+        emptyStateView.frame = view.bounds
+        view.addSubview(emptyStateView)
+    }
+    
+}
