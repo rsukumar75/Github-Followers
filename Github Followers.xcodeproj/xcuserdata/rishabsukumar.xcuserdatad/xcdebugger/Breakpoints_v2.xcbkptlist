@@ -158,8 +158,8 @@
             filePath = "Github Followers/Extensions/UIViewController+Presentation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "showLoadingView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "Github Followers/Extensions/UIViewController+Presentation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "showLoadingView()"
             landmarkType = "7">
             <Locations>
@@ -237,8 +237,8 @@
             filePath = "Github Followers/View Controllers/FollowerListVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getFollowers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -273,6 +273,198 @@
             endingLineNumber = "26"
             landmarkName = "getFollowers(for:page:completion:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71BC2785-6D4B-419A-B231-66822E162EAA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/Network Module/NetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "getUserInfo(for:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "71BC2785-6D4B-419A-B231-66822E162EAA - 1c5a31f72d672dc8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Github_Followers.NetworkManager.getUserInfo(for: Swift.String, completion: (Swift.Result&lt;Github_Followers.User, Github_Followers.GFError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/Network%20Module/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "804">
+               </Location>
+               <Location
+                  uuid = "71BC2785-6D4B-419A-B231-66822E162EAA - 54b2ae0aafc2c84e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Github_Followers.NetworkManager.getUserInfo(for: Swift.String, completion: (Swift.Result&lt;Github_Followers.User, Github_Followers.GFError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/Network%20Module/NetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "363">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBEA56B1-11D5-4699-9F11-5CD740B7FD59"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/View Controllers/Item Info VCs/GFRepoItemVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "didTapActionButton()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1829F1E-CAAC-4BF7-A28D-A4B1F47DBE0C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/View Controllers/Item Info VCs/GFItemInfoVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "setupActionButton()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D1829F1E-CAAC-4BF7-A28D-A4B1F47DBE0C - 778a5fdd5763084f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Github_Followers.GFItemInfoVC.setupActionButton() -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/View%20Controllers/Item%20Info%20VCs/GFItemInfoVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "41">
+               </Location>
+               <Location
+                  uuid = "D1829F1E-CAAC-4BF7-A28D-A4B1F47DBE0C - 778a5fdd576307a2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Github_Followers.GFItemInfoVC.setupActionButton() -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/View%20Controllers/Item%20Info%20VCs/GFItemInfoVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CDC6AAD9-9669-43E3-B272-FFB48283AB36"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/View Controllers/GFUserInfoVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "didTapGithubProfile(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF282816-FBAB-47D9-B6A7-A2CB41E90A39"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/View Controllers/Item Info VCs/GFRepoItemVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "configureItems()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CD9CDE32-F35A-4120-8ACD-DDC1BC3FA767"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Github Followers/View Controllers/Item Info VCs/GFItemInfoVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "GFItemInfoVC"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "CD9CDE32-F35A-4120-8ACD-DDC1BC3FA767 - a2b95939524e33d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Github_Followers.GFItemInfoVC.didTapActionButton() -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/View%20Controllers/Item%20Info%20VCs/GFItemInfoVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "CD9CDE32-F35A-4120-8ACD-DDC1BC3FA767 - a2b95939524e33d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Github_Followers.GFItemInfoVC.didTapActionButton() -&gt; ()"
+                  moduleName = "Github Followers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabsukumar/Documents/Rishab/Interviews/Github%20Followers/Github%20Followers/View%20Controllers/Item%20Info%20VCs/GFItemInfoVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

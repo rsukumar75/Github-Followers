@@ -8,17 +8,17 @@
 import Foundation
 
 struct User: Codable, Hashable {
-    var login: String
-    var htmlURL: String
-    var avatarUrl: String
-    var name: String?
-    var location: String?
-    var bio: String?
-    var publicRepos: Int
-    var publicGists: Int
-    var followers: Int
-    var following: Int
-    var createdAt: String
+    let login: String
+    let htmlUrl: String
+    let avatarUrl: String
+    let name: String?
+    let location: String?
+    let bio: String?
+    let publicRepos: Int
+    let publicGists: Int
+    let followers: Int
+    let following: Int
+    let createdAt: String
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(login)

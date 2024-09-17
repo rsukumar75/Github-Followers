@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchUserVC: UIViewController{
+class GFSearchUserVC: UIViewController{
     let searchBar: GFSearchTextField = GFSearchTextField(placeholder: "Enter a username")
     let searchButton: GFButton = GFButton(backgroundColor: UIColor.defaultGreenColor, title: "Get Followers")
     let ghLogoImageView = GFImageView()
@@ -95,7 +95,7 @@ class SearchUserVC: UIViewController{
         }
         
         if let username = searchBar.text {
-            let followerListVC = FollowerListVC(username: username)
+            let followerListVC = GFFollowerListVC(username: username)
             self.navigationController?.pushViewController(followerListVC, animated: true)
         }
     }
@@ -103,7 +103,7 @@ class SearchUserVC: UIViewController{
 
 }
 
-extension SearchUserVC: UITextFieldDelegate {
+extension GFSearchUserVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.getFollowers()
         
