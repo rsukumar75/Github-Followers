@@ -32,7 +32,7 @@ class PersistenceManager {
             retrievedFavorites.removeAll { $0 == favorite }
         }
         
-        try saveFavorites(favorites: retrievedFavorites)
+        try await saveFavorites(favorites: retrievedFavorites)
     }
     
     static func retrieveFavorites() async throws -> [Follower] {
@@ -49,7 +49,7 @@ class PersistenceManager {
         }
     }
     
-    static func saveFavorites(favorites: [Follower]) throws {
+    static func saveFavorites(favorites: [Follower]) async throws {
         do {
             let encoder = JSONEncoder()
             let favoritesData = try encoder.encode(favorites)

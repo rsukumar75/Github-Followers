@@ -38,25 +38,22 @@ class GFAvatarImageView: UIImageView {
         
         if let image = imageCache.object(forKey: cacheKey) {
             self.image = image
-            
             return
         }
         
         guard let imageURL = URL(string: urlString) else { return }
-        let task = URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
-            guard let self = self else { return }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
-            guard let data = data else { return }
-            guard let image = UIImage(data: data) else { return }
-            
-            self.imageCache.setObject(image, forKey: cacheKey)
-            
-            DispatchQueue.main.async {
+        
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: imageURL)
+                guard let image = UIImage(data: data) else { return }
+                
+                imageCache.setObject(image, forKey: cacheKey)
                 self.image = image
+            } catch {
+                return
             }
         }
-        
-        task.resume()
     }
     
 }
