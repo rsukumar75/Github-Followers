@@ -11,14 +11,16 @@ import SafariServices
 fileprivate var loadingView: GFLoadingView? = nil
 
 extension UIViewController {
-    func presentGFAlertOnMainThread(alertTitle: String?, message: String?, buttonTitle: String?) {
-        DispatchQueue.main.async {
-            let alertController = GFAlertController(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
-            alertController.modalPresentationStyle = .overFullScreen
-            alertController.modalTransitionStyle = .crossDissolve
-            
-            self.present(alertController, animated: true)
-        }
+    func presentGFAlert(
+        alertTitle: String? = "Something went wrong",
+        message: String? = "We were unable to complete your task at this time. Please try again.",
+        buttonTitle: String? = "OK"
+    ) {
+        let alertController = GFAlertController(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
+        alertController.modalPresentationStyle = .overFullScreen
+        alertController.modalTransitionStyle = .crossDissolve
+        
+        present(alertController, animated: true)
     }
     
     func showLoadingView() {

@@ -56,25 +56,30 @@ class GFFollowerListVC: UIViewController {
     
     @objc func addToFavorites() {
         showLoadingView()
-        NetworkManager.sharedInstance.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let user):
-                let favorite = Follower(login: self.username, avatarUrl: user.avatarUrl)
-                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    
-                    if let error = error {
-                        self.presentGFAlertOnMainThread(alertTitle: "Could not add to favorites", message: error.rawValue, buttonTitle: "OK")
+        Task {
+            do {
+                let user = try await NetworkManager.sharedInstance.getUserInfo(for: username)
+                let favorite = Follower(login: username, avatarUrl: user.avatarUrl)
+                do {
+                    try await PersistenceManager.updateWith(favorite: favorite, actionType: .add)
+                    presentGFAlert(alertTitle: "Success", message: "Successfully added \(self.username) to favorites 🎉", buttonTitle: "OK")
+                } catch {
+                    if let gfError = error as? GFError {
+                        presentGFAlert(alertTitle: "Could not add to favorites", message: gfError.rawValue, buttonTitle: "OK")
                     } else {
-                        self.presentGFAlertOnMainThread(alertTitle: "Success", message: "Successfully added \(self.username) to favorites 🎉", buttonTitle: "OK")
+                        presentGFAlert()
                     }
                 }
-                break
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Unable to get user info", message: error.rawValue, buttonTitle: "OK")
+                
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(alertTitle: "Unable to get user info", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentGFAlert()
+                }
+                
+                dismissLoadingView()
             }
         }
     }
@@ -107,33 +112,38 @@ class GFFollowerListVC: UIViewController {
     
     func getFollowers() {
         showLoadingView()
-        NetworkManager.sharedInstance.getFollowers(for: username, page: pageNumber) { [weak self] result in
-            guard let self = self else { return }
-            
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                if (followers.count < NetworkManager.sharedInstance.pageSize) {
-                    self.hasMoreFollowers = false
+        
+        Task {
+            do {
+                let followers = try await NetworkManager.sharedInstance.getFollowers(for: username, page: pageNumber)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(alertTitle: "Unable to fetch followers", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentGFAlert()
                 }
                 
-                self.followers.append(contentsOf: followers)
-                
-                if (self.followers.isEmpty) {
-                    let emptyMessage = "This user doesn't have any followers. Go follow them 😁"
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: emptyMessage, in: self.view)
-                    }
-                    return
-                }
-                
-                self.updateData(followers: self.followers)
-            case .failure(let gfError):
-                self.presentGFAlertOnMainThread(alertTitle: "Unable to fetch followers", message: gfError.rawValue, buttonTitle: "OK")
-                return
+                dismissLoadingView()
             }
         }
+    }
+    
+    func updateUI(with followers: [Follower]) {
+        if (followers.count < NetworkManager.sharedInstance.pageSize) {
+            hasMoreFollowers = false
+        }
+        
+        self.followers.append(contentsOf: followers)
+        
+        if (self.followers.isEmpty) {
+            let emptyMessage = "This user doesn't have any followers. Go follow them 😁"
+            showEmptyStateView(with: emptyMessage, in: self.view)
+            return
+        }
+
+        updateData(followers: self.followers)
     }
     
     func updateData(followers: [Follower]) {

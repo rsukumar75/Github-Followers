@@ -89,7 +89,7 @@ class GFSearchUserVC: UIViewController{
         UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
         
         guard isUsernameEntered else {
-            self.presentGFAlertOnMainThread(alertTitle: "Empty Username", message: "Please enter a username. We need to know who to look for 😁", buttonTitle: "OK")
+            presentGFAlert(alertTitle: "Empty Username", message: "Please enter a username. We need to know who to look for 😁", buttonTitle: "OK")
             
             return
         }

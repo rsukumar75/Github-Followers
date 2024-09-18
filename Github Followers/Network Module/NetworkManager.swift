@@ -15,76 +15,49 @@ class NetworkManager {
     
     private init() {}
     
-    func getFollowers(for username: String, page: Int, completion: @escaping (Result<[Follower], GFError>) -> ()) {
+    func getFollowers(for username: String, page: Int) async throws -> [Follower] {
         let endpoint = baseURL + "\(username)/followers?per_page=\(pageSize)&page=\(page)"
         guard let url = URL(string: endpoint) else {
-            completion(.failure(.invalidUsername))
-            return
+            throw GFError.invalidUsername
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error {
-                completion(.failure(.unableToComplete))
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.invalidData))
-                return
-            }
-            
-            do {
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                let followers: [Follower] = try jsonDecoder.decode([Follower].self, from: data)
-                
-                completion(.success(followers))
-            } catch {
-                completion(.failure(.invalidData))
-            }
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw GFError.invalidResponse
         }
         
-        task.resume()
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            return try decoder.decode([Follower].self, from: data)
+        } catch {
+            throw GFError.invalidData
+        }
+        
     }
     
-    func getUserInfo(for username: String, completion: @escaping (Result<User, GFError>) -> ()) {
+    func getUserInfo(for username: String) async throws -> User {
         let endpoint = baseURL + "\(username)"
+        
         guard let url = URL(string: endpoint) else {
-            completion(.failure(.invalidUsername))
-            return
+            throw GFError.invalidUsername
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error {
-                completion(.failure(.unableToComplete))
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.invalidData))
-                return
-            }
-            
-            do {
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                jsonDecoder.dateDecodingStrategy = .iso8601
-                let user: User = try jsonDecoder.decode(User.self, from: data)
-                
-                completion(.success(user))
-            } catch {
-                completion(.failure(.invalidData))
-            }
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse else {
+            throw GFError.invalidResponse
         }
         
-        task.resume()
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            return try decoder.decode(User.self, from: data)
+        } catch {
+            throw GFError.invalidData
+        }
     }
 }

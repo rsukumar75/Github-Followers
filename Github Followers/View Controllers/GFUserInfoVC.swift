@@ -93,16 +93,16 @@ class GFUserInfoVC: UIViewController {
     }
     
     private func getUserInfo() {
-        NetworkManager.sharedInstance.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let userInfo):
-                DispatchQueue.main.async {
-                    self.configureUIElements(with: userInfo)
+        Task {
+            do {
+                let userInfo = try await NetworkManager.sharedInstance.getUserInfo(for: username)
+                configureUIElements(with: userInfo)
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(alertTitle: "Unable to get user info", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentGFAlert()
                 }
-                print(userInfo)
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Unable to get user info", message: error.rawValue, buttonTitle: "OK")
             }
         }
     }
@@ -124,7 +124,7 @@ class GFUserInfoVC: UIViewController {
 extension GFUserInfoVC: GFItemInfoVCDelegate {
     func didTapGithubProfile(for user: User) {
         guard let htmlUrl = URL(string: user.htmlUrl) else {
-            presentGFAlertOnMainThread(alertTitle: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "OK")
+            presentGFAlert(alertTitle: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "OK")
             return
         }
         
@@ -133,10 +133,9 @@ extension GFUserInfoVC: GFItemInfoVCDelegate {
     
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
-            presentGFAlertOnMainThread(alertTitle: "No Followers", message: "This user has no followers. What a shame 😤", buttonTitle: "So sad")
+            presentGFAlert(alertTitle: "No Followers", message: "This user has no followers. What a shame 😤", buttonTitle: "So sad")
             return
         }
-        
         
         self.delegate.didRequestFollowers(for: user.login)
         
