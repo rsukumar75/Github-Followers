@@ -12,8 +12,12 @@ class NetworkManager {
     private let baseURL = "https://api.github.com/users/"
     let pageSize = 100
     let imageCache = NSCache<NSString, UIImage>()
+    let decoder = JSONDecoder()
     
-    private init() {}
+    private init() {
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+    }
     
     func getFollowers(for username: String, page: Int) async throws -> [Follower] {
         let endpoint = baseURL + "\(username)/followers?per_page=\(pageSize)&page=\(page)"
@@ -26,9 +30,6 @@ class NetworkManager {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw GFError.invalidResponse
         }
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
             return try decoder.decode([Follower].self, from: data)
@@ -52,9 +53,6 @@ class NetworkManager {
         }
         
         do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             return try decoder.decode(User.self, from: data)
         } catch {
             throw GFError.invalidData
